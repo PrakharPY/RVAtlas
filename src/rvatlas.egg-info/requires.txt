@@ -1,0 +1,6 @@
+Pillow>=12.0
+
+[dev]
+pytest
+black
+ruff

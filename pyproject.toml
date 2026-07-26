@@ -1,1 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
 
+[project]
+name = "rvatlas"
+version = "0.1.0"
+description = "Texture atlas generator with automatic UV remapping for Wavefront OBJ models."
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "Pillow>=12.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "ruff"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+
+[tool.ruff]
+line-length = 88
