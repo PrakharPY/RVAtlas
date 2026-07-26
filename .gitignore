@@ -1,18 +1,15 @@
-# RVAtlas
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.venv/
 
+# IDE
+.vscode/
+.idea/
+
+# Project
 output/
-input/
-
-*.obj
-*.mtl
-*.dds
-*.png
-*.bmp
-
-# Ignore ripped assets
-examples/input/*
-examples/output/*
-
-# Keep folder structure
-!examples/input/.gitkeep
-!examples/output/.gitkeep
