@@ -4,7 +4,7 @@ Texture atlas model.
 
 from dataclasses import dataclass, field
 
-from .rectangle import Rectangle
+from .placement import Placement
 
 
 @dataclass(slots=True)
@@ -16,11 +16,7 @@ class Atlas:
     width: int
     height: int
 
-    rectangles: list[Rectangle] = field(default_factory=list)
+    placements: list[Placement] = field(default_factory=list)
 
-    def add(self, rectangle: Rectangle) -> None:
-        """
-        Add a packed rectangle.
-        """
-
-        self.rectangles.append(rectangle)
+    def add(self, placement: Placement) -> None:
+        self.placements.append(placement)

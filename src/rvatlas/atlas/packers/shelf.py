@@ -4,6 +4,7 @@ Simple Shelf atlas packing algorithm.
 
 from rvatlas.atlas.atlas import Atlas
 from rvatlas.atlas.packers.base import BasePacker
+from rvatlas.atlas.placement import Placement
 from rvatlas.atlas.rectangle import Rectangle
 from rvatlas.models.texture import Texture
 
@@ -20,7 +21,6 @@ class ShelfPacker(BasePacker):
     ) -> None:
 
         self.textures = textures
-
         self.atlas_width = atlas_width
 
     def pack(self) -> Atlas:
@@ -32,7 +32,6 @@ class ShelfPacker(BasePacker):
 
         x = 0
         y = 0
-
         shelf_height = 0
 
         for texture in self.textures:
@@ -42,28 +41,26 @@ class ShelfPacker(BasePacker):
                     f"Texture not loaded: {texture.path}"
                 )
 
-            #
-            # Doesn't fit on this shelf?
-            #
             if x + texture.width > self.atlas_width:
-
                 x = 0
-
                 y += shelf_height
-
                 shelf_height = 0
 
-            rect = Rectangle(
+            rectangle = Rectangle(
                 x=x,
                 y=y,
                 width=texture.width,
                 height=texture.height,
             )
 
-            atlas.add(rect)
+            atlas.add(
+                Placement(
+                    texture=texture,
+                    rectangle=rectangle,
+                )
+            )
 
             x += texture.width
-
             shelf_height = max(
                 shelf_height,
                 texture.height,

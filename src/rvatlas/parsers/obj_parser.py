@@ -21,7 +21,7 @@ Unsupported (for now):
 from pathlib import Path
 
 from rvatlas.models.face import Face, FaceVertex
-from rvatlas.models.geometry import Vertex, UV, Normal
+from rvatlas.models.geometry import Normal, UV, Vertex
 from rvatlas.models.mesh import Mesh
 
 
@@ -31,13 +31,11 @@ class OBJParser:
     """
 
     def __init__(self, path: str | Path):
-
         self.path = Path(path)
 
         self.mesh = Mesh()
 
         self.material_library: str | None = None
-
         self.current_material: str | None = None
 
     def parse(self) -> tuple[Mesh, str | None]:
@@ -53,7 +51,7 @@ class OBJParser:
         with self.path.open(
             "r",
             encoding="utf-8",
-            errors="ignore"
+            errors="ignore",
         ) as file:
 
             for line in file:
@@ -134,28 +132,30 @@ class OBJParser:
 
             parts = token.split("/")
 
-            vertex = int(parts[0])
+            # OBJ indices are 1-based.
+            # Convert them to Python's 0-based indexing.
+            vertex = int(parts[0]) - 1
 
             uv = None
             normal = None
 
             if len(parts) > 1 and parts[1]:
-                uv = int(parts[1])
+                uv = int(parts[1]) - 1
 
             if len(parts) > 2 and parts[2]:
-                normal = int(parts[2])
+                normal = int(parts[2]) - 1
 
             face_vertices.append(
                 FaceVertex(
-                    vertex=vertex,
-                    uv=uv,
-                    normal=normal,
+                    vertex_index=vertex,
+                    uv_index=uv,
+                    normal_index=normal,
                 )
             )
 
         self.mesh.faces.append(
             Face(
                 vertices=face_vertices,
-                material=self.current_material,
+                material_name=self.current_material,
             )
         )
