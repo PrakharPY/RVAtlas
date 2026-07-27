@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from rvatlas.atlas.packers.shelf import ShelfPacker
 from rvatlas.loaders.texture_loader import TextureLoader
 from rvatlas.parsers.mtl_parser import MTLParser
 from rvatlas.parsers.obj_parser import OBJParser
@@ -17,7 +18,7 @@ def main() -> None:
         mtl_path = obj_path.parent / material_library
         MTLParser(mesh, mtl_path).parse()
 
-    # Load texture information
+    # Load texture metadata
     TextureLoader(mesh).load()
 
     print("=" * 60)
@@ -43,7 +44,8 @@ def main() -> None:
     print("Sample Materials")
     print("-" * 60)
 
-    # Show only the first five materials
+    textures = []
+
     for material in list(mesh.materials.values())[:5]:
 
         if material.texture is None:
@@ -52,11 +54,34 @@ def main() -> None:
 
         texture = material.texture
 
+        textures.append(texture)
+
         print(
             f"{material.name:<25}"
             f" -> {texture.path.name}"
             f" ({texture.width} x {texture.height})"
         )
+
+    #
+    # Pack ALL textures into an atlas
+    #
+    textures = [
+        material.texture
+        for material in mesh.materials.values()
+        if material.texture is not None
+    ]
+
+    atlas = ShelfPacker(textures).pack()
+
+    print()
+
+    print("=" * 60)
+    print("Atlas")
+    print("=" * 60)
+
+    print(f"Width      : {atlas.width}")
+    print(f"Height     : {atlas.height}")
+    print(f"Rectangles : {len(atlas.rectangles)}")
 
 
 if __name__ == "__main__":
