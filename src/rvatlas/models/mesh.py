@@ -7,6 +7,7 @@ from dataclasses import dataclass, field
 from .face import Face
 from .geometry import Normal, UV, Vertex
 from .material import Material
+from pathlib import Path
 
 
 @dataclass(slots=True)
@@ -24,6 +25,8 @@ class Mesh:
     faces: list[Face] = field(default_factory=list)
 
     materials: dict[str, Material] = field(default_factory=dict)
+
+    material_library: Path | None = None
 
     @property
     def triangle_count(self) -> int:
