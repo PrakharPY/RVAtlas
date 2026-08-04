@@ -15,7 +15,7 @@ class UVMapper:
     @staticmethod
     def map_uv(
         uv: UV,
-        atlas,
+        atlas: Atlas,
         placement,
     ) -> UV:
         """

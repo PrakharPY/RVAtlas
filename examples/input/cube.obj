@@ -1,0 +1,39 @@
+# Blender v2.73 (sub 0) OBJ File: ''
+# www.blender.org
+mtllib cube.mtl
+o Cube
+v 1.000000 -1.000000 -1.000000
+v 1.000000 -1.000000 1.000000
+v -1.000000 -1.000000 1.000000
+v -1.000000 -1.000000 -1.000000
+v 1.000000 1.000000 -0.999999
+v 0.999999 1.000000 1.000001
+v -1.000000 1.000000 1.000000
+v -1.000000 1.000000 -1.000000
+vt 0.999900 0.000100
+vt 0.999900 0.999900
+vt 0.000100 0.999900
+vt 0.000100 0.000100
+vt 0.000000 0.000000
+vt 1.000000 0.000000
+vt 1.000000 1.000000
+vt 0.000000 1.000000
+g Cube_Cube_Material
+usemtl Material
+s off
+f 2/1 6/2 7/3 3/4
+g Cube_Cube_Material_1.png
+usemtl Material_1.png
+f 1/5 5/6 6/7 2/8
+g Cube_Cube_Material_4.png
+usemtl Material_4.png
+f 5/1 1/2 4/3 8/4
+g Cube_Cube_Material_6.png
+usemtl Material_6.png
+f 1/2 2/3 3/4 4/1
+g Cube_Cube_Material_5.png
+usemtl Material_5.png
+f 5/2 8/3 7/4 6/1
+g Cube_Cube_Material_3.png
+usemtl Material_3.png
+f 3/3 7/4 8/1 4/2
